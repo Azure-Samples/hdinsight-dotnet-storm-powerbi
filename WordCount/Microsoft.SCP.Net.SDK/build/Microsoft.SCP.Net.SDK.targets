@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishDependsOn>
+      $(PublishDependsOn);
+      ScpCPrepare;
+      ScpCGenerateSpec;
+      ScpCPackage;
+    </PublishDependsOn>
+    <ScpCExePath>$(MSBuildThisFileDirectory)..\tools\ScpC.exe</ScpCExePath>
+    <ScpPackagePath>$(OutputPath)\ScpPackage</ScpPackagePath>
+    <AssemblyExtension Condition=" '$(OutputType)' == 'Library' ">.dll</AssemblyExtension>
+    <AssemblyExtension Condition=" '$(OutputType)' == 'Exe' ">.exe</AssemblyExtension>
+  </PropertyGroup>
+  <Target Name="ScpCPrepare">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\lib\Microsoft.SCPNet.dll"
+       DestinationFolder="$(MSBuildThisFileDirectory)..\tools" SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\sdk\Newtonsoft.Json.dll"
+             DestinationFolder="$(MSBuildThisFileDirectory)..\tools" SkipUnchangedFiles="true"/>
+  </Target>
+  <Target Name="ScpCGenerateSpec">
+    <Message Importance="High" Text="[ScpC] Phase generate-spec"/>
+    <Message Text="$(ScpCExePath) generate-spec -assembly $(OutputPath)\$(AssemblyName)$(AssemblyExtension) -spec $(MSBuildProjectName).spec -class $(ScpClassName)" />
+    <Exec Command="$(ScpCExePath) generate-spec -assembly $(OutputPath)\$(AssemblyName)$(AssemblyExtension) -spec $(MSBuildProjectName).spec -class $(ScpClassName)" />
+  </Target>
+  <Target Name="ScpCPackage">
+    <Message Importance="High" Text="[ScpC] Phase package"/>
+    <RemoveDir Directories="$(ScpPackagePath)" />
+    <Message Text="$(ScpCExePath) package -cSharpTarget $(OutputPath) -packageFile $(ScpPackagePath)\$(MSBuildProjectName).zip -javaDependencies $(ScpJavaDependencies) -javaDependenciesTxt $(ScpJavaDependenciesTxt)" />
+    <Exec Command="$(ScpCExePath) package -cSharpTarget $(OutputPath) -packageFile $(ScpPackagePath)\$(MSBuildProjectName).zip -javaDependencies $(ScpJavaDependencies) -javaDependenciesTxt $(ScpJavaDependenciesTxt)" />
+    <Copy SourceFiles="$(MSBuildProjectName).spec"
+             DestinationFolder="$(ScpPackagePath)"/>
+  </Target>
+</Project>
