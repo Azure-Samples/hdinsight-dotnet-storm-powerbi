@@ -1,0 +1,5 @@
+/Users/larryfr/Documents/hdinsight-dotnet-storm-powerbi/Data/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/larryfr/Documents/hdinsight-dotnet-storm-powerbi/Data/bin/Debug/Data.dll.mdb
+/Users/larryfr/Documents/hdinsight-dotnet-storm-powerbi/Data/bin/Debug/Data.dll
+/Users/larryfr/Documents/hdinsight-dotnet-storm-powerbi/Data/obj/Debug/Data.dll
+/Users/larryfr/Documents/hdinsight-dotnet-storm-powerbi/Data/obj/Debug/Data.dll.mdb
