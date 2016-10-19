@@ -57,10 +57,18 @@ namespace SqlAzureWriterStormApplication
         RetryPolicy ConnectionRetryPolicy { get; set; }
         RetryPolicy CommandRetryPolicy { get; set; }
 
+        //For holding configuration values passed in with context
+        Configuration configuration;
+
         public SqlAzureBolt(Context context, Dictionary<string, Object> parms)
         {
             //Set the context
             this.context = context;
+            //Get values from app config
+            if(parms.ContainsKey(Constants.USER_CONFIG))
+            {
+                this.configuration = parms[Constants.USER_CONFIG] as System.Configuration.Configuration;
+            }
 
             //TODO: VERY IMPORTANT - Declare the schema for the incoming tuples from the downstream spout or bolt tasks
             //You will also need to declare the schema for the any outgoing tuples to the upstream spout or bolt tasks
@@ -105,19 +113,19 @@ namespace SqlAzureWriterStormApplication
         /// </summary>
         public void InitializeSqlAzure()
         {
-            this.SqlConnectionString = ConfigurationManager.AppSettings["SqlAzureConnectionString"];
+            this.SqlConnectionString = this.configuration.AppSettings.Settings["SqlAzureConnectionString"].Value;
             if (String.IsNullOrWhiteSpace(this.SqlConnectionString))
             {
                 throw new ArgumentException("A required AppSetting cannot be null or empty", "SqlAzureConnectionString");
             }
 
-            this.SqlTableName = ConfigurationManager.AppSettings["SqlAzureTableName"];
+            this.SqlTableName = this.configuration.AppSettings.Settings["SqlAzureTableName"].Value;
             if (String.IsNullOrWhiteSpace(this.SqlTableName))
             {
                 throw new ArgumentException("A required AppSetting cannot be null or empty", "SqlAzureTableName");
             }
 
-            var columns = ConfigurationManager.AppSettings["SqlAzureTableColumns"];
+            var columns = this.configuration.AppSettings.Settings["SqlAzureTableColumns"].Value;
             if (String.IsNullOrWhiteSpace(columns))
             {
                 throw new ArgumentException("A required AppSetting cannot be null or empty", "SqlAzureTableColumns");

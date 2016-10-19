@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.props" Condition="Exists('..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.props')" />
+  <Import Project="..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.props" Condition="Exists('..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,8 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -49,15 +49,31 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SCPLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\lib\Microsoft.SCPLogger.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\Microsoft.SCPLogger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SCPNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\lib\Microsoft.SCPNet.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\Microsoft.SCPNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SCPHost, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\SCPHost.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SCPLogger.Log4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\SCPLogger.Log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SCPPerfCounter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\SCPPerfCounter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SCPPerfCounterWrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\SCPPerfCounterWrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,12 +85,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Thrift, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\lib\Thrift.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\Thrift.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ZooKeeperNet, Version=3.4.6.1, Culture=neutral, PublicKeyToken=fefd2c046da35b56, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ZooKeeper.Net.3.4.6.2\lib\net40\ZooKeeperNet.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\lib\net45\ZooKeeperNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -97,10 +112,10 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.targets'))" />
   </Target>
-  <Import Project="..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.targets" Condition="Exists('..\packages\Microsoft.SCP.Net.SDK.0.9.4.400\build\Microsoft.SCP.Net.SDK.targets')" />
+  <Import Project="..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.targets" Condition="Exists('..\packages\Microsoft.SCP.Net.SDK.0.10.0.6\build\Microsoft.SCP.Net.SDK.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
